@@ -1,5 +1,5 @@
 # Install Metallib
-[Metalib](https://metallb.universe.tf/concepts/) creates a LoadBalancer service type that lets me request a service of type LoadBalancer, which will automatically get an IP from my specified pool.
+[Metallib](https://metallb.universe.tf/concepts/) creates a LoadBalancer service type that lets me request a service of type LoadBalancer, which will be automatically assigned an IP from my configured pool.
 
 1. Install the deployment:
   ```
