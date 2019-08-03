@@ -150,31 +150,36 @@ This is the set of instructions for building out a Raspberry Pi image, getting K
         ```
 
 ### Create StorageClass in Kubernetes
-        What we are doing here is creating a new StorageClass containing a persistent volume.  
+  Creating a new namespace/rbac/deployment/storageclass to allow other pods to provision storage on the NFS service
 
+  ```
+  kubectl apply -f nfs-storage-namespace.yaml
+  kubectl apply -f nfs-storage-rbac.yaml
+  kubectl apply -f nfs-storage-deployment.yaml
+  kubectl apply -f nfs-storage-storageclass.yaml
+  ```
 
-        kubectl apply -f all the files
-        kubectl patch storageclass nfs-ssd1 -p '{"metadata":{"annotations": {"storageclass.kubernetes.io/is-default-class": "true"}}}'
+  kubectl patch storageclass nfs-ssd1 -p '{"metadata":{"annotations": {"storageclass.kubernetes.io/is-default-class": "true"}}}'
 
-        How I use storageclass?
+  How I use storageclass?
 
 ### List it:
-        ```
-        kubectl get storageclass
-        ```
+  ```
+  kubectl get storageclass
+  ```
 
 ### Create a claim on it:
-        ```
-        kind: PersistentVolumeClaim
-        apiVersion: v1
-        metadata:
-          name: test-claim
-          annotations:
-        #    volume.beta.kubernetes.io/storage-class: "nfs-master-ssd"
-        spec:
-          accessModes:
-            - ReadWriteMany
-          resources:
-            requests:
-              storage: 1Mi
-        ```
+  ```
+  kind: PersistentVolumeClaim
+  apiVersion: v1
+  metadata:
+    name: test-claim
+    annotations:
+  #    volume.beta.kubernetes.io/storage-class: "nfs-master-ssd"
+  spec:
+    accessModes:
+      - ReadWriteMany
+    resources:
+      requests:
+        storage: 1Mi
+  ```
