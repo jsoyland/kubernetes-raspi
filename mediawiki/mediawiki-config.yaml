@@ -1,0 +1,94 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: mediawiki-config
+  namespace: default
+data:
+  LocalSettings.php: |
+   <?php
+   if ( !defined( 'MEDIAWIKI' ) ) {
+      exit;
+   }
+   $wgSitename = "invictus";
+   $wgMetaNamespace = "Invictus";
+   $wgScriptPath = "";
+   $wgServer = "http://wiki.soynet.local";
+   $wgResourceBasePath = $wgScriptPath;
+   $wgLogo = "$wgResourceBasePath/resources/assets/wiki.png";
+   $wgEnableEmail = true;
+   $wgEnableUserEmail = true; # UPO
+   $wgEmergencyContact = "apache@wiki.soynet.local";
+   $wgPasswordSender = "apache@wiki.soynet.local";
+   $wgEnotifUserTalk = false; # UPO
+   $wgEnotifWatchlist = false; # UPO
+   $wgEmailAuthentication = true;
+   $wgDBtype = "sqlite";
+   $wgDBserver = "";
+   $wgDBname = "wiki";
+   $wgDBuser = "";
+   $wgDBpassword = "";
+   $wgSQLiteDataDir = "/var/www/data";
+   $wgObjectCaches[CACHE_DB] = [
+      'class' => SqlBagOStuff::class,
+      'loggroup' => 'SQLBagOStuff',
+      'server' => [
+      'type' => 'sqlite',
+      'dbname' => 'wikicache',
+      'tablePrefix' => '',
+      'variables' => [ 'synchronous' => 'NORMAL' ],
+      'dbDirectory' => $wgSQLiteDataDir,
+      'trxMode' => 'IMMEDIATE',
+      'flags' => 0
+      ]
+   ];
+   $wgLocalisationCacheConf['storeServer'] = [
+      'type' => 'sqlite',
+      'dbname' => "{$wgDBname}_l10n_cache",
+      'tablePrefix' => '',
+      'variables' => [ 'synchronous' => 'NORMAL' ],
+      'dbDirectory' => $wgSQLiteDataDir,
+      'trxMode' => 'IMMEDIATE',
+      'flags' => 0
+   ];
+   $wgJobTypeConf['default'] = [
+     'class' => 'JobQueueDB',
+      'claimTTL' => 3600,
+      'server' => [
+      'type' => 'sqlite',
+      'dbname' => "{$wgDBname}_jobqueue",
+      'tablePrefix' => '',
+      'dbDirectory' => $wgSQLiteDataDir,
+      'trxMode' => 'IMMEDIATE',
+      'flags' => 0
+      ]
+   ];
+   $wgMainCacheType = CACHE_NONE;
+   $wgMemCachedServers = [];
+   $wgEnableUploads = true;
+   $wgUseImageMagick = true;
+   $wgFileExtensions = array_merge(
+      $wgFileExtensions, array(
+         'pdf', 'ppt', 'jp2', 'webp', 'doc','docx', 'xls', 'xlsx', 'zip'
+      )
+   );
+   $wgImageMagickConvertCommand = "/usr/bin/convert";
+   $wgUseInstantCommons = false;
+   $wgPingback = true;
+   $wgShellLocale = "C.UTF-8";
+   $wgLanguageCode = "en";
+   $wgSecretKey = "CHANGEMECHANGEMECHANGEMECHANGEMECHANGEMECHANGEMECHANGEMECHANGEME";
+   $wgAuthenticationTokenVersion = "1";
+   $wgUpgradeKey = "Changemechangeme";
+   $wgRightsPage = ""; # Set to the title of a wiki page that describes your license/copyright
+   $wgRightsUrl = "";
+   $wgRightsText = "";
+   $wgRightsIcon = "";
+   $wgDiff3 = "/usr/bin/diff3";
+   $wgDefaultSkin = "vector";
+   wfLoadSkin( 'MonoBook' );
+   wfLoadSkin( 'Timeless' );
+   wfLoadSkin( 'Vector' );
+   # End of automatically generated settings.
+   # Add more configuration options below.
+   # Corrected issue while logging on without https
+   $wgSessionCacheType = CACHE_DB;
