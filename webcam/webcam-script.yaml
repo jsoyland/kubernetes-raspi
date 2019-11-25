@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: webcam-script
+  namespace: default
+data:
+  fetch-image.sh: |
+    !/bin/sh
+    while command
+    do
+      wget http://192.168.1.210/cam_pic.php -O /root/images/webcam_`date +%Y%m%d_%H%M`.jpg
+      sleep 1200
+    done

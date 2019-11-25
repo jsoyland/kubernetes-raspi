@@ -193,3 +193,17 @@ Build out a Raspberry Pi image, getting Kubernetes installed, and nodes communic
   kubectl apply -f pihole-udp-service.yaml
   kubectl apply -f pihole-deployment.yaml
   ```
+
+  ## Install webcam monitoring pod
+    Uses the standard busybox container to run a script (defined as a configmap in webcam-script.yaml).  Script loops every 20 minutes to `wget` a static image from a webcam and saves it to the persistentvolumeclaim.
+
+    * `webcam-persistentvolumeclaim.yaml` - PersistentVolumeClaim for image storage.
+    * `webcam-script.yaml` - Simple sh script that uses wget to save static image from a webcam to the PersistentVolumeClaim.
+    * `webcam-deployment.yaml` - Just the busybox image, but mounts the PersistentVolumeClaim and the script, then executes the script.
+
+    Apply in this order, since deployment depends upon the volume/configmap
+    ```
+    kubectl apply -f webcam-persistentvolumeclaim.yaml
+    kubectl apply -f webcam-script.yaml
+    kubectl apply -f webcam-deployment.yaml
+    ```

@@ -1,0 +1,34 @@
+apiVersion: apps/v1 # for versions before 1.9.0 use apps/v1beta2
+kind: Deployment
+metadata:
+  name: webcam
+spec:
+  selector:
+    matchLabels:
+      app: webcam
+  replicas: 1 # tells deployment to run 2 pods matching the template
+  template:
+    metadata:
+      labels:
+        app: webcam
+    spec:
+      containers:
+      - name: webcam
+        image: busybox
+        command: 
+          - "/bin/sh"
+          - "/root/fetch-image.sh"
+        resources: {}
+        volumeMounts:
+        - mountPath: /root/images
+          name: webcam-storage
+        - mountPath: /root/fetch-image.sh
+          subPath: fetch-image.sh
+          name: webcam-script
+      volumes:
+      - name: webcam-storage
+        persistentVolumeClaim:
+          claimName: webcam-storage
+      - name: webcam-script
+        configMap:
+          name: webcam-script
