@@ -14,7 +14,7 @@ data:
    $wgScriptPath = "";
    $wgServer = "http://wiki.soynet.local";
    $wgResourceBasePath = $wgScriptPath;
-   $wgLogo = "$wgResourceBasePath/resources/assets/wiki.png";
+   $wgLogo = "$wgResourceBasePath/images/6/6f/Invictus.png";
    $wgEnableEmail = true;
    $wgEnableUserEmail = true; # UPO
    $wgEmergencyContact = "apache@wiki.soynet.local";
@@ -66,6 +66,7 @@ data:
    $wgMemCachedServers = [];
    $wgEnableUploads = true;
    $wgUseImageMagick = true;
+   $wgCheckFileExtensions = false;
    $wgFileExtensions = array_merge(
       $wgFileExtensions, array(
          'pdf', 'ppt', 'jp2', 'webp', 'doc','docx', 'xls', 'xlsx', 'zip'
@@ -92,3 +93,4 @@ data:
    # Add more configuration options below.
    # Corrected issue while logging on without https
    $wgSessionCacheType = CACHE_DB;
+
