@@ -8,10 +8,6 @@ data:
     !/bin/sh
     while command
     do
-<<<<<<< HEAD
       wget http://192.168.1.210/cam_pic.php -O /root/images/webcam_`date +%Y%m%d_%H%M`.jpg
-=======
-      wget http://192.168.1.210/cam_pic.php -O /root/images/hydroponics_`date +%Y%m%d_%H%M`.jpg
->>>>>>> 5e9c9bde1275353952752d7b5d1ab01ea17ea790
       sleep 1200
     done
