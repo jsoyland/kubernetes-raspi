@@ -178,7 +178,7 @@ Build out a Raspberry Pi image, getting Kubernetes installed, and nodes communic
   This is also based on an "official" docker image ([pihole/pihole](https://hub.docker.com/r/pihole/pihole))
 
   * `pihole-config-persistentvolumeclaim.yaml` - PersistentVolumeClaim for the config directory - stores the blacklist/whitelist/logs/etc
-  * `pihole-webpassword-secret.yaml` - Secret password for website.  This needs to be updated (In the file as `<changeme>`)
+  * `pihole-webpassword-secret.yaml` - Secret password for website encoded in base64 (`echo newpassword | base64`).  This needs to be updated (In the file as `<changeme>`).  
   * `pihole-custom-dnsmasq-configmap.yaml` - ConfigMap for creating a custom dnsmasq.  Customize as needed.
   * `pihole-tcp-service.yaml` - Service for tcp services - Update with correct service IP (something that is in the reserved block from Metallb)
   * `pihole-udp-service.yaml` - Service for udp services - Update with correct service IP (same as UDP service IP).  TCP and UDP can't be in the same service for some reason.
