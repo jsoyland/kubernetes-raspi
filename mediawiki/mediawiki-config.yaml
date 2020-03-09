@@ -77,15 +77,18 @@ data:
    $wgPingback = true;
    $wgShellLocale = "C.UTF-8";
    $wgLanguageCode = "en";
-   $wgSecretKey = "CHANGEMECHANGEMECHANGEMECHANGEMECHANGEMECHANGEMECHANGEMECHANGEME";
+   $wgSecretKey = "35a8b52da9d5ea31164e8612971432bbc9a1fa868ad2de0f6df409eb3640a637";
    $wgAuthenticationTokenVersion = "1";
-   $wgUpgradeKey = "Changemechangeme";
+   $wgUpgradeKey = "676c92e33a637d9e";
    $wgRightsPage = ""; # Set to the title of a wiki page that describes your license/copyright
    $wgRightsUrl = "";
    $wgRightsText = "";
    $wgRightsIcon = "";
    $wgDiff3 = "/usr/bin/diff3";
    $wgDefaultSkin = "vector";
+   $wgShowExceptionDetails = true;
+   $wgShowDBErrorBacktrace = true;
+   $wgShowSQLErrors = true;
    wfLoadSkin( 'MonoBook' );
    wfLoadSkin( 'Timeless' );
    wfLoadSkin( 'Vector' );
